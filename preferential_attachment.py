@@ -119,25 +119,25 @@ if __name__ == '__main__':
     graph2 = set_excite_inhibit(graph, excite_fract=0.5)
 
     draw_weighted_graph(graph2)
-    plt.show()
+    # plt.show()
     
     # nx.write_gexf(graph, "../results/scale_free.gexf")
-    # nx.draw(graph, with_labels=False, node_size=20)
+    # nx.draw(graph, with_labels=False, 
     # plt.show()
+    
+    degree_sequence = sorted([d for n, d in graph.degree()], reverse=True)  # degree sequence
+    # print "Degree sequence", degree_sequence
+    degreeCount = collections.Counter(degree_sequence)
+    deg, cnt = zip(*degreeCount.items())
 
-    # degree_sequence = sorted([d for n, d in graph.degree()], reverse=True)  # degree sequence
-    # # print "Degree sequence", degree_sequence
-    # degreeCount = collections.Counter(degree_sequence)
-    # deg, cnt = zip(*degreeCount.items())
+    fig, ax = plt.subplots()
+    plt.plot(deg, cnt, '-.',  color='b')
 
-    # fig, ax = plt.subplots()
-    # plt.plot(deg, cnt, '-.',  color='b')
-
-    # plt.title("Degree Histogram")
-    # plt.ylabel("Count")
-    # plt.xlabel("Degree")
-    # ax.set_xticks([d + 0.4 for d in deg])
-    # ax.set_xticklabels(deg)
-    # ax.set_xscale('log')
-    # ax.set_yscale('log')
-    # plt.show()
+    plt.title("Degree Histogram")
+    plt.ylabel("Count")
+    plt.xlabel("Degree")
+    ax.set_xticks([d + 0.4 for d in deg])
+    ax.set_xticklabels(deg)
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    plt.show()
